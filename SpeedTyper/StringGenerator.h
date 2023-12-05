@@ -1,6 +1,3 @@
-#ifndef STRINGGENERATOR_H
-#define STRINGGENERATOR_H
-
 #include <string>
 #include <random>
 
@@ -13,5 +10,3 @@ public:
     StringGenerator();
     std::string generateRandomString(int minLength, int maxLength);
 };
-
-#endif // STRINGGENERATOR_H
