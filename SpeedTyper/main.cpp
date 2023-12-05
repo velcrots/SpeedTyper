@@ -1,16 +1,11 @@
-#include "MapCreator.h"
-#include "StringGenerator.h"
+#include "GameManager.h"
 
 int main() {
     const int width = 5;
-    const int height = 20;
-    const int minLength = 2;
-    const int maxLength = 20;
+    const int height = 30;
 
-    MapCreator mapCreator(height, width);
-    StringGenerator stringGenerator;
-    
-    mapCreator.printMap();
+    GameManager gameManager(height, width);
+    gameManager.startGame();
 
     return 0;
 }
