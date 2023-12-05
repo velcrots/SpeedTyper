@@ -129,6 +129,8 @@
   <ItemGroup>
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapCreator.cpp" />
+    <ClCompile Include="MapCreator.h" />
     <ClCompile Include="StringGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>

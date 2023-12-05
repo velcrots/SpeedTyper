@@ -1,6 +1,10 @@
-#include <iostream>
+#include "MapCreator.h"
 
-int main(void) {
+int main() {
+    const int width = 5;
+    const int height = 15;
+    MapCreator mapCreator(height, width);
+    mapCreator.printMap();
 
-	return 0;
+    return 0;
 }
