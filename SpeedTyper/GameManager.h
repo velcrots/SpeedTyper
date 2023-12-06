@@ -10,5 +10,6 @@ private:
 public:
     GameManager(int numRows, int numColumns);
     void startGame();
+    void handleInput();
     void endGame();
 };
