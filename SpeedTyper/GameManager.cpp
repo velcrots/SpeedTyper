@@ -1,6 +1,8 @@
 #include "GameManager.h"
 #include <iostream>
 #include <windows.h>
+#include <thread>
+#include <conio.h>
 
 GameManager::GameManager(int numRows, int numColumns) : mapCreator(numRows, numColumns) {}
 
@@ -17,6 +19,9 @@ void GameManager::startGame() {
     }
 
     std::string newString;
+    std::string input;
+
+    std::thread inputThread(&GameManager::handleInput, this);
 
     while (!isFailed) {
         Sleep(1000);
@@ -35,7 +40,7 @@ void GameManager::startGame() {
             stage--;
         }
 
-        for(int i = 0; i < mapCreator.getCol(); i++) {
+        for (int i = 0; i < mapCreator.getCol(); i++) {
             if (mapCreator.getElement(mapCreator.getRow() - 1, i) != defaultString) {
                 isFailed = true;
             }
@@ -50,9 +55,20 @@ void GameManager::startGame() {
             }
         }
 
-
         system("cls");
         mapCreator.printMap();
+    }
+
+    inputThread.join();
+    endGame();
+    
+}
+
+void GameManager::handleInput() {
+    while (true) {
+        if (_kbhit()) {
+            char ch = _getch();
+        }
     }
 }
 
