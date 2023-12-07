@@ -31,19 +31,16 @@ void GameManager::startGame() {
             srand((unsigned int)time(NULL));
             int location = rand() % mapCreator.getCol();
             mapCreator.setTile(0, location, newString);
-            this->words.push_back(newString);
+            std::pair<int, std::string> newPair;
+            newPair.first = 0;
+            newPair.second = newString;
+            this->words.push_back(newPair);
         }
 
         count++;
 
         if (count % 100 == 0 && stage > 1) {
             stage--;
-        }
-
-        for (int i = 0; i < mapCreator.getCol(); i++) {
-            if (mapCreator.getElement(mapCreator.getRow() - 1, i) != defaultString) {
-                isFailed = true;
-            }
         }
 
         for (int i = mapCreator.getRow() - 2; i >= 0; i--) {
@@ -54,6 +51,13 @@ void GameManager::startGame() {
                 }
             }
         }
+        
+        for (int i = 0; i < words.size(); i++) {
+			words[i].first++;
+            if (words[i].first == mapCreator.getRow() - 1) {
+				isFailed = true;
+			}
+		}
 
         system("cls");
         mapCreator.printMap();
@@ -68,6 +72,29 @@ void GameManager::handleInput() {
     while (true) {
         if (_kbhit()) {
             char ch = _getch();
+            if (ch == 27) {
+				break;
+			}
+            else if (ch == 8) {
+                if (input.length() > 0) {
+					input.pop_back();
+				}
+			}
+            else if (ch == 13) {
+                for (int i = 0; i < words.size(); i++) {
+                    if (input == words[i].second) {
+                        for (int j = 0; j < mapCreator.getCol(); j++) {
+                            mapCreator.setTile(words[i].first, j, "                    ");
+                        }
+						words.erase(words.begin() + i);
+						break;
+					}
+				}
+				input = "";
+			}
+            else {
+				input += ch;
+			}
         }
     }
 }
