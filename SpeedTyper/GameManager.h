@@ -7,6 +7,7 @@ private:
     StringGenerator stringGenerator;
     std::vector<std::pair<int, std::string>> words;
     std::string input;
+    int score = 0;
 
 public:
     GameManager(int numRows, int numColumns);
